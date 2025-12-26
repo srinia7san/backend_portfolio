@@ -7,7 +7,7 @@ import Resume from "./model/resume.js";
 // Load environment variables
 dotenv.config();
 
-const mongoURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/portfolio";
+const mongoURI = process.env.MONGODB_URI;
 
 // Sample data
 const skillsData = [

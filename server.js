@@ -35,6 +35,11 @@ import { notFound, errorHandler } from "./midlleware/errorMiddleware.js";
 
 const dataRoute = route
 
+// Health check endpoint for cold start wake-up pings
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 app.use("/", dataRoute)
 
 // Error Handling Middleware
