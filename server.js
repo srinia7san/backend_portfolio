@@ -1,5 +1,5 @@
 import express from "express"
-import route from "../backend/routes/routes.js"
+import route from "./routes/routes.js"
 import cors from "cors"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
