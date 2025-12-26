@@ -10,16 +10,26 @@ dotenv.config()
 const app = express();
 app.use(express.json())
 const PORT = process.env.PORT
-// CORS Configuration
+// CORS Configuration - include both env variable and explicit fallback
 const allowedOrigins = [
-  process.env.FRONTEND_URL // Production URL
+  process.env.FRONTEND_URL,
+  'https://srinivasan-x96o.onrender.com'  // Explicit frontend URL
 ].filter(Boolean);
+
+console.log('Allowed CORS origins:', allowedOrigins);
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) {
+      callback(null, true);
+      return;
+    }
+
+    if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
+      console.log('CORS blocked origin:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
