@@ -9,12 +9,9 @@ dotenv.config()
 
 const app = express();
 app.use(express.json())
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT
 // CORS Configuration
 const allowedOrigins = [
-  "http://localhost:5173", // Local frontend
-  "http://localhost:5174", // Local frontend (alternate port)
-  "http://localhost:4173", // Local preview
   process.env.FRONTEND_URL // Production URL
 ].filter(Boolean);
 
@@ -30,7 +27,7 @@ app.use(cors({
 }));
 
 // MongoDB connection using environment variable
-mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/portfolio")
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => { console.log("Mongo Connected!") })
   .catch((err) => { console.log(err) })
 
